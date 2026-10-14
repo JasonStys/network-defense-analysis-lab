@@ -1,58 +1,63 @@
 """Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: example — line 83
-# parameter: updates — line 83
-# variable: value — line 85
-# definition: test_event_rejections — line 113
-# parameter: key — line 113
-# parameter: value — line 113
-# definition: test_event_dns_contract — line 119
-# variable: valid — line 121
-# variable: changes — line 125
-# definition: test_logs_reject — line 151
-# parameter: data — line 151
-# definition: test_log_limits_ids — line 157
-# variable: line — line 161
-# variable: data — line 167
-# variable: index — line 169
-# definition: test_json_nesting_failure — line 178
-# parameter: monkeypatch — line 178
-# definition: fail — line 181
-# parameter: args — line 181
-# parameter: kwargs — line 181
-# definition: test_native_contract — line 204
-# parameter: data — line 204
-# definition: test_native_row_edges — line 210
-# variable: row — line 212
-# variable: bad — line 214
-# definition: test_policy_limits — line 231
-# variable: base — line 233
-# variable: value — line 235
-# definition: test_sliding_window_boundaries — line 253
-# variable: values — line 255
-# variable: index — line 257
-# variable: port — line 257
-# variable: second — line 257
-# variable: value — line 261
-# variable: value — line 266
-# definition: test_beacon_alternatives_and_caps — line 275
-# variable: base — line 277
-# variable: times — line 278
-# variable: events — line 279
-# variable: i — line 281
-# variable: t — line 281
-# variable: result — line 288
-# variable: index — line 291
-# variable: result — line 296
-# variable: index — line 297
-# definition: test_jsonl_property — line 308
-# parameter: data — line 308
-# variable: values — line 311
-# variable: value — line 314
-# definition: test_root_dns_and_real_bounds — line 318
-# variable: _ — line 322
-# variable: events — line 322
-# variable: issues — line 322
+# definition: example — line 88
+# parameter: updates — line 88
+# variable: value — line 90
+# definition: test_event_rejections — line 118
+# parameter: key — line 118
+# parameter: value — line 118
+# definition: test_event_dns_contract — line 124
+# variable: valid — line 126
+# variable: changes — line 130
+# definition: test_oversized_policy_integer — line 152
+# variable: base — line 154
+# definition: test_logs_reject — line 163
+# parameter: data — line 163
+# definition: test_log_limits_ids — line 169
+# variable: line — line 173
+# variable: data — line 179
+# variable: index — line 181
+# definition: test_json_nesting_failure — line 190
+# parameter: monkeypatch — line 190
+# definition: fail — line 193
+# parameter: args — line 193
+# parameter: kwargs — line 193
+# definition: test_allowlist_hostnames — line 202
+# variable: base — line 204
+# variable: name — line 205
+# definition: test_native_contract — line 231
+# parameter: data — line 231
+# definition: test_native_row_edges — line 237
+# variable: row — line 239
+# variable: bad — line 241
+# definition: test_policy_limits — line 258
+# variable: base — line 260
+# variable: value — line 262
+# definition: test_sliding_window_boundaries — line 280
+# variable: values — line 282
+# variable: index — line 284
+# variable: port — line 284
+# variable: second — line 284
+# variable: value — line 288
+# variable: value — line 293
+# definition: test_beacon_alternatives_and_caps — line 302
+# variable: base — line 304
+# variable: times — line 305
+# variable: events — line 306
+# variable: i — line 308
+# variable: t — line 308
+# variable: result — line 315
+# variable: index — line 318
+# variable: result — line 323
+# variable: index — line 324
+# definition: test_jsonl_property — line 335
+# parameter: data — line 335
+# variable: values — line 338
+# variable: value — line 341
+# definition: test_root_dns_and_real_bounds — line 345
+# variable: _ — line 349
+# variable: events — line 349
+# variable: issues — line 349
 # END CODE MAP
 
 from __future__ import annotations
@@ -144,6 +149,13 @@ def test_event_dns_contract():
         event(example(protocol=[]))
 
 
+def test_oversized_policy_integer():
+    """Reject unbounded JSON integers before conversion to a finite float can overflow."""
+    base = json.loads((ROOT / "config/default.json").read_text())
+    with pytest.raises(ValueError, match="metric invalid"):
+        policy(base | {"entropy_bits": 10**1000})
+
+
 @pytest.mark.parametrize(
     "data",
     [b"{", b"[]", b"\xff", b'{"identifier":1,"identifier":2}', b" " * 4097, b"{}\n\n"],
@@ -185,6 +197,21 @@ def test_json_nesting_failure(monkeypatch):
     monkeypatch.setattr(json, "loads", fail)
     with pytest.raises(ValueError, match="nesting"):
         logs(b"{}")
+
+
+def test_allowlist_hostnames():
+    """Only exact canonical DNS names are valid suppression values; wildcards cannot hide evidence."""
+    base = json.loads((ROOT / "config/default.json").read_text())
+    for name in ["*.example", "UPPER.example", "a..example", "a" * 64, ""]:
+        with pytest.raises(ValueError, match="domain invalid"):
+            policy(
+                base
+                | {
+                    "allowed_domains": [
+                        {"name": name, "reason": "Intentional negative test"}
+                    ]
+                }
+            )
 
 
 @pytest.mark.parametrize(

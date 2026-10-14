@@ -191,7 +191,13 @@ def main(argv: list[str] | None = None) -> int:
             )
         else:
             analyze(args)
-    except (ValueError, OSError, RecursionError, subprocess.TimeoutExpired) as error:
+    except (
+        ValueError,
+        OSError,
+        RecursionError,
+        subprocess.TimeoutExpired,
+        sqlite3.Error,
+    ) as error:
         print(
             f"Analysis stopped ({type(error).__name__}); check input limits, build and output path. No raw input logged.",
             file=sys.stderr,

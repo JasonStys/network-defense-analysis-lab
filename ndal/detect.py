@@ -1,98 +1,100 @@
 """Jason Stys: bounded explainable DNS/window/fan-out/periodicity hypotheses with scoped allowlists."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: Policy — line 105
-# variable: window_seconds — line 108
-# variable: nxdomain_threshold — line 109
-# variable: port_threshold — line 110
-# variable: beacon_minimum — line 111
-# variable: beacon_jitter — line 112
-# variable: long_label — line 113
-# variable: entropy_bits — line 114
-# variable: allowed_connections — line 115
-# variable: allowed_domains — line 116
-# definition: policy — line 119
-# parameter: value — line 119
-# variable: high — line 123
-# variable: key — line 123
-# variable: low — line 123
-# variable: key — line 131
-# variable: lower — line 131
-# variable: upper — line 131
-# variable: key — line 138
-# variable: item — line 141
-# variable: expected — line 142
-# definition: entropy — line 163
-# parameter: label — line 163
-# variable: count — line 168
-# definition: finding — line 175
-# parameter: explanation — line 176
-# parameter: measurement — line 176
-# parameter: rule — line 176
-# parameter: subject — line 176
-# parameter: values — line 176
-# variable: value — line 185
-# definition: window — line 190
-# parameter: ports — line 190
-# parameter: seconds — line 190
-# parameter: values — line 190
-# variable: active — line 192
-# variable: counts — line 193
-# variable: best_end — line 194
-# variable: best_start — line 194
-# variable: start — line 195
-# variable: maximum — line 196
-# variable: index — line 197
-# variable: value — line 197
-# variable: removed — line 199
-# variable: start — line 200
-# variable: score — line 206
-# variable: maximum — line 208
-# variable: best_end — line 209
-# variable: best_start — line 209
-# definition: detect — line 213
-# parameter: events — line 213
-# parameter: issues — line 213
-# parameter: settings — line 213
-# variable: dns_failures — line 217
-# variable: ports — line 218
-# variable: connections — line 219
-# variable: output — line 220
-# variable: allowed_names — line 221
-# variable: item — line 221
-# variable: allowed — line 222
-# variable: item — line 224
-# parameter: item — line 226
-# variable: value — line 226
-# variable: label — line 231
-# variable: score — line 232
-# variable: subject — line 251
-# variable: values — line 251
-# variable: peak — line 252
-# variable: dst — line 263
-# variable: src — line 263
-# variable: values — line 263
-# variable: peak — line 264
-# variable: count — line 265
-# variable: value — line 265
-# variable: dst — line 276
-# variable: port — line 276
-# variable: src — line 276
-# variable: values — line 276
-# variable: intervals — line 279
-# variable: left — line 281
-# variable: right — line 281
-# variable: average — line 283
-# variable: jitter — line 286
-# variable: grouped — line 297
-# variable: issue — line 298
-# variable: code — line 300
-# variable: problem_values — line 300
-# variable: item — line 308
+# definition: Policy — line 107
+# variable: window_seconds — line 110
+# variable: nxdomain_threshold — line 111
+# variable: port_threshold — line 112
+# variable: beacon_minimum — line 113
+# variable: beacon_jitter — line 114
+# variable: long_label — line 115
+# variable: entropy_bits — line 116
+# variable: allowed_connections — line 117
+# variable: allowed_domains — line 118
+# definition: policy — line 121
+# parameter: value — line 121
+# variable: high — line 125
+# variable: key — line 125
+# variable: low — line 125
+# variable: key — line 133
+# variable: lower — line 133
+# variable: upper — line 133
+# variable: key — line 140
+# variable: item — line 143
+# variable: expected — line 144
+# variable: label — line 164
+# definition: entropy — line 170
+# parameter: label — line 170
+# variable: count — line 175
+# definition: finding — line 182
+# parameter: explanation — line 183
+# parameter: measurement — line 183
+# parameter: rule — line 183
+# parameter: subject — line 183
+# parameter: values — line 183
+# variable: value — line 192
+# definition: window — line 197
+# parameter: ports — line 197
+# parameter: seconds — line 197
+# parameter: values — line 197
+# variable: active — line 199
+# variable: counts — line 200
+# variable: best_end — line 201
+# variable: best_start — line 201
+# variable: start — line 202
+# variable: maximum — line 203
+# variable: index — line 204
+# variable: value — line 204
+# variable: removed — line 206
+# variable: start — line 207
+# variable: score — line 213
+# variable: maximum — line 215
+# variable: best_end — line 216
+# variable: best_start — line 216
+# definition: detect — line 220
+# parameter: events — line 220
+# parameter: issues — line 220
+# parameter: settings — line 220
+# variable: dns_failures — line 224
+# variable: ports — line 225
+# variable: connections — line 226
+# variable: output — line 227
+# variable: allowed_names — line 228
+# variable: item — line 228
+# variable: allowed — line 229
+# variable: item — line 231
+# parameter: item — line 233
+# variable: value — line 233
+# variable: label — line 238
+# variable: score — line 239
+# variable: subject — line 258
+# variable: values — line 258
+# variable: peak — line 259
+# variable: dst — line 270
+# variable: src — line 270
+# variable: values — line 270
+# variable: peak — line 271
+# variable: count — line 272
+# variable: value — line 272
+# variable: dst — line 283
+# variable: port — line 283
+# variable: src — line 283
+# variable: values — line 283
+# variable: intervals — line 286
+# variable: left — line 288
+# variable: right — line 288
+# variable: average — line 290
+# variable: jitter — line 293
+# variable: grouped — line 304
+# variable: issue — line 305
+# variable: code — line 307
+# variable: problem_values — line 307
+# variable: item — line 315
 # END CODE MAP
 
 from __future__ import annotations
 
 import math
+import re
 from collections import Counter, defaultdict, deque
 from dataclasses import dataclass
 from statistics import mean, pstdev
@@ -131,8 +133,8 @@ def policy(value: Any) -> Policy:
     for key, lower, upper in [("beacon_jitter", 0.0, 1.0), ("entropy_bits", 0.0, 6.0)]:
         if (
             type(value[key]) not in {int, float}
-            or not math.isfinite(value[key])
             or not lower <= value[key] <= upper
+            or not math.isfinite(value[key])
         ):
             raise ValueError("policy metric invalid")
     for key in ["allowed_connections", "allowed_domains"]:
@@ -155,7 +157,12 @@ def policy(value: Any) -> Policy:
                 address(item["src"])
                 address(item["dst"])
                 integer(item["dport"], 0, 65535)
-            elif not isinstance(item["name"], str) or not 1 <= len(item["name"]) <= 253:
+            elif (
+                not isinstance(item["name"], str)
+                or not 1 <= len(item["name"]) <= 253
+                or not re.fullmatch(r"[a-z0-9_-]+(?:\.[a-z0-9_-]+)*", item["name"])
+                or any(len(label) > 63 for label in item["name"].split("."))
+            ):
                 raise ValueError("allowlist domain invalid")
     return Policy(**value)
 

@@ -35,7 +35,7 @@ def compare(data: bytes) -> None:
         path = Path(directory) / "synthetic.pcap"
         write(path, data)
         completed = subprocess.run(
-            ["tcpdump", "-n", "-q", "-tt", "-r", str(path), "tcp or udp"],
+            ["tcpdump", "-nn", "-q", "-tt", "-r", str(path), "tcp or udp"],
             capture_output=True,
             timeout=15,
             check=True,
