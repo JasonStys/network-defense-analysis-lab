@@ -1,24 +1,25 @@
 """Jason Stys: exact tracked-file README purpose inventory, unknown files fail rather than receive guesses."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 29
-# variable: BEGIN — line 30
-# variable: END — line 30
-# variable: SPECIAL — line 31
-# definition: purpose — line 44
-# parameter: name — line 44
-# variable: text — line 48
-# variable: line — line 53
-# definition: main — line 59
-# variable: parser — line 61
-# variable: args — line 63
-# variable: names — line 64
-# variable: rows — line 72
-# variable: name — line 73
-# variable: path — line 75
-# variable: original — line 76
-# variable: end — line 77
-# variable: start — line 77
-# variable: expected — line 78
+# variable: ROOT — line 30
+# variable: BEGIN — line 31
+# variable: END — line 31
+# variable: SPECIAL — line 32
+# definition: purpose — line 45
+# parameter: name — line 45
+# variable: text — line 49
+# variable: line — line 54
+# definition: main — line 60
+# variable: parser — line 62
+# variable: args — line 64
+# variable: names — line 65
+# variable: rows — line 73
+# variable: name — line 74
+# variable: label — line 75
+# variable: path — line 77
+# variable: original — line 78
+# variable: end — line 79
+# variable: start — line 79
+# variable: expected — line 80
 # END CODE MAP
 
 import argparse
@@ -71,7 +72,8 @@ def main() -> None:
         raise ValueError("Stage reviewed files first")
     rows = ["| File | Purpose |", "| --- | --- |"]
     for name in sorted(names):
-        rows.append(f"| [{name}]({name}) | {purpose(name).replace('|', '/')} |")
+        label = name.replace("_", "\\_")
+        rows.append(f"| [{label}]({name}) | {purpose(name).replace('|', '/')} |")
     path = ROOT / "README.md"
     original = path.read_text(encoding="utf-8")
     start, end = original.index(BEGIN) + len(BEGIN), original.index(END)

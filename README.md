@@ -94,7 +94,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [native/lib.rs](native/lib.rs) | Jason Stys: bounded classic-PCAP/Ethernet/IPv4/UDP/TCP/DNS metadata decoder. |
 | [native/main.rs](native/main.rs) | Jason Stys: read one bounded regular capture file and emit safe versioned TSV metadata. |
 | [native/tests.rs](native/tests.rs) | Jason Stys: independent native wire fixtures, boundary tests and deterministic mutation fuzzing. |
-| [ndal/__init__.py](ndal/__init__.py) | Jason Stys: offline synthetic network evidence analysis, no runtime third-party packages. |
+| [ndal/\_\_init\_\_.py](ndal/__init__.py) | Jason Stys: offline synthetic network evidence analysis, no runtime third-party packages. |
 | [ndal/cli.py](ndal/cli.py) | Jason Stys: local bounded file analysis, synthetic demo generation and private no-overwrite evidence output. |
 | [ndal/detect.py](ndal/detect.py) | Jason Stys: bounded explainable DNS/window/fan-out/periodicity hypotheses with scoped allowlists. |
 | [ndal/model.py](ndal/model.py) | Jason Stys: strict immutable metadata models and native TSV/network-log trust boundaries. |
@@ -106,15 +106,15 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [requirements-dev.lock](requirements-dev.lock) | Full universal hash-locked Python development dependency graph. |
 | [rust-toolchain.toml](rust-toolchain.toml) | Jason Stys: reproducible tested compiler; no automatic floating stable toolchain. |
 | [scripts/benchmark.py](scripts/benchmark.py) | Jason Stys: reproducible bounded release-decoder and analysis timings; no universal performance claims. |
-| [scripts/code_map.py](scripts/code_map.py) | Jason Stys: generate exact definition/variable line maps and verify Python function/class contracts. |
+| [scripts/code\_map.py](scripts/code_map.py) | Jason Stys: generate exact definition/variable line maps and verify Python function/class contracts. |
 | [scripts/differential.py](scripts/differential.py) | Jason Stys: independent libpcap/tcpdump fixture conformance, synthetic files only and no live interfaces. |
-| [scripts/file_guide.py](scripts/file_guide.py) | Jason Stys: exact tracked-file README purpose inventory, unknown files fail rather than receive guesses. |
+| [scripts/file\_guide.py](scripts/file_guide.py) | Jason Stys: exact tracked-file README purpose inventory, unknown files fail rather than receive guesses. |
 | [scripts/scanners.py](scripts/scanners.py) | Install only hash-pinned official Linux scanner binaries. Created by Jason Stys. |
-| [scripts/validate_repo.py](scripts/validate_repo.py) | Jason Stys: private-evidence exclusion, exact links/pins and dependency-free/offline runtime gates. |
+| [scripts/validate\_repo.py](scripts/validate_repo.py) | Jason Stys: private-evidence exclusion, exact links/pins and dependency-free/offline runtime gates. |
 | [sql/schema.sql](sql/schema.sql) | Jason Stys: strict transactional metadata-only evidence schema with indexed human-review searches. |
 | [sql/search.sql](sql/search.sql) | Jason Stys: exact source/hostname search uses bound values, never interpolated SQL or wildcard guesses. |
-| [tests/test_contracts.py](tests/test_contracts.py) | Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests. |
-| [tests/test_pipeline.py](tests/test_pipeline.py) | Jason Stys: real Rust subprocess, labeled scenario, CLI privacy, evidence SQL and report integration tests. |
+| [tests/test\_contracts.py](tests/test_contracts.py) | Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests. |
+| [tests/test\_pipeline.py](tests/test_pipeline.py) | Jason Stys: real Rust subprocess, labeled scenario, CLI privacy, evidence SQL and report integration tests. |
 | [tools.lock.json](tools.lock.json) | Official scanner versions, release URLs and pinned SHA256 digests. |
 
 <!-- END FILE GUIDE -->
