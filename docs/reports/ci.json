@@ -1,0 +1,92 @@
+{
+  "schema": "ndal-ci-acceptance-v1",
+  "author": "Jason Stys",
+  "recorded_at_utc": "2026-10-14T13:57:49Z",
+  "accepted_source_sha": "6372878b0455d41a17e3e87fc4a604216ede8c03",
+  "scope": "Immutable accepted implementation checks; documentation commits are independently checked before handoff. No future-commit success implied.",
+  "open_codeql_alerts": 0,
+  "artifact_count": 0,
+  "cache_count": 0,
+  "runs": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-14T13:55:09Z",
+      "databaseId": 38575898731,
+      "headSha": "6372878b0455d41a17e3e87fc4a604216ede8c03",
+      "jobs": [
+        {
+          "completedAt": "2026-10-14T13:55:38Z",
+          "conclusion": "success",
+          "name": "Locked graph, secrets and workflows",
+          "startedAt": "2026-10-14T13:55:11Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731/job/115892779785"
+        },
+        {
+          "completedAt": "2026-10-14T13:55:52Z",
+          "conclusion": "success",
+          "name": "Rust + Python / ubuntu-24.04 / 3.14",
+          "startedAt": "2026-10-14T13:55:11Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731/job/115892779852"
+        },
+        {
+          "completedAt": "2026-10-14T13:55:34Z",
+          "conclusion": "success",
+          "name": "Differential decoding + release benchmarks",
+          "startedAt": "2026-10-14T13:55:11Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731/job/115892779874"
+        },
+        {
+          "completedAt": "2026-10-14T13:55:47Z",
+          "conclusion": "success",
+          "name": "Rust + Python / ubuntu-24.04 / 3.12",
+          "startedAt": "2026-10-14T13:55:12Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731/job/115892779999"
+        },
+        {
+          "completedAt": "2026-10-14T13:56:33Z",
+          "conclusion": "success",
+          "name": "Rust + Python / windows-latest / 3.14",
+          "startedAt": "2026-10-14T13:55:12Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731/job/115892780005"
+        },
+        {
+          "completedAt": "2026-10-14T13:56:52Z",
+          "conclusion": "success",
+          "name": "Rust + Python / macos-15-intel / 3.14",
+          "startedAt": "2026-10-14T13:55:12Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731/job/115892780090"
+        }
+      ],
+      "name": "Validate",
+      "status": "completed",
+      "updatedAt": "2026-10-14T13:56:53Z",
+      "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898731"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-14T13:55:09Z",
+      "databaseId": 38575898749,
+      "headSha": "6372878b0455d41a17e3e87fc4a604216ede8c03",
+      "jobs": [
+        {
+          "completedAt": "2026-10-14T13:56:00Z",
+          "conclusion": "success",
+          "name": "CodeQL / Python",
+          "startedAt": "2026-10-14T13:55:11Z",
+          "status": "completed",
+          "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898749/job/115892779245"
+        }
+      ],
+      "name": "CodeQL",
+      "status": "completed",
+      "updatedAt": "2026-10-14T13:56:01Z",
+      "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/38575898749"
+    }
+  ]
+}

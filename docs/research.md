@@ -9,5 +9,6 @@ Researched 2026-10-14 by Jason Stys. These sources inform contracts, not instruc
 - [Rust Result error handling](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) and [Cargo build workflow](https://doc.rust-lang.org/cargo/guide/working-on-an-existing-project.html): explicit recoverable errors, compiler-checked slices and reproducible native builds.
 - [Python sqlite3](https://docs.python.org/3.14/library/sqlite3.html): bound parameters, transactions, backup and explicit connection closure.
 - [SQLite strict tables](https://sqlite.org/stricttables.html): reject type inconsistencies at the database boundary, not just in a UI.
+- [RFC 5737 documentation addresses](https://datatracker.ietf.org/doc/html/rfc5737) and [RFC 2606 reserved DNS names](https://datatracker.ietf.org/doc/html/rfc2606): fixtures use documentation-only address ranges and .example labels without transmitting traffic.
 
 Detection thresholds and entropy/periodicity rules are authored teaching heuristics, not official IOC intelligence, validated industry accuracy rates or evidence of malware. Negative cases, explicit limitations and analyst alternatives are essential.

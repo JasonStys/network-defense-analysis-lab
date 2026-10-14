@@ -83,8 +83,10 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: bounded offline evidence. |
 | [docs/contracts.md](docs/contracts.md) | Parser, evidence and detection contracts. |
 | [docs/performance.md](docs/performance.md) | Complexity and benchmark methodology. |
+| [docs/release.md](docs/release.md) | Release and maintenance checklist. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured synthetic Windows benchmark snapshot, not a throughput promise. |
-| [docs/reports/validation.md](docs/reports/validation.md) | Validation report. |
+| [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source CI job snapshot, not a future guarantee. |
+| [docs/reports/validation.md](docs/reports/validation.md) | Validation and accepted-source evidence. |
 | [docs/research.md](docs/research.md) | Primary research and implementation rationale. |
 | [docs/security.md](docs/security.md) | Threat model and security policy. |
 | [docs/testing.md](docs/testing.md) | Testing strategy and acceptance gates. |
