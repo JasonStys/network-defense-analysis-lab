@@ -1,0 +1,89 @@
+{
+  "measured_at_utc": "2026-10-14T13:49:12.599468+00:00",
+  "architecture": "AMD64",
+  "schema": "ndal-benchmark-v1",
+  "author": "Jason Stys",
+  "os": "Windows",
+  "python": "3.14.6",
+  "rust": "1.98.1",
+  "repeats": 7,
+  "warmups": 1,
+  "scope": "Release Rust process startup + bounded temporary file IO + parse + TSV emission + Python normalization; analysis timing adds rules and in-memory SQLite. No generation time, coverage, tracemalloc or network included. Shared-runner timings are observations, not pass/fail throughput targets.",
+  "workloads": [
+    {
+      "packets": 1000,
+      "capture_bytes": 77024,
+      "decode_seconds": [
+        0.03342819999943458,
+        0.033968199999435456,
+        0.034468099999685364,
+        0.031877600000370876,
+        0.034834500000215485,
+        0.033323500000733475,
+        0.03193060000012338
+      ],
+      "analysis_seconds": [
+        0.008318099999996775,
+        0.005659599999489728,
+        0.006730200000674813,
+        0.005252699999800825,
+        0.006584300000213261,
+        0.006027200000062294,
+        0.005494699999871955
+      ],
+      "decode_median_seconds": 0.03342819999943458,
+      "analysis_median_seconds": 0.006027200000062294,
+      "packets_per_second_observed": 29914.862302394817
+    },
+    {
+      "packets": 5000,
+      "capture_bytes": 385024,
+      "decode_seconds": [
+        0.09659730000021227,
+        0.0876393000007738,
+        0.08939540000028501,
+        0.08805779999966035,
+        0.08945320000020729,
+        0.09743950000029145,
+        0.10577990000001591
+      ],
+      "analysis_seconds": [
+        0.024147500000253785,
+        0.024703600000066217,
+        0.02465299999948911,
+        0.024142500000380096,
+        0.028338699999949313,
+        0.02767920000042068,
+        0.027667899999869405
+      ],
+      "decode_median_seconds": 0.08945320000020729,
+      "analysis_median_seconds": 0.024703600000066217,
+      "packets_per_second_observed": 55895.1496423651
+    },
+    {
+      "packets": 20000,
+      "capture_bytes": 1540024,
+      "decode_seconds": [
+        0.42823430000044027,
+        0.3561546000000817,
+        0.37219440000080795,
+        0.3761053999996875,
+        0.3548529999998209,
+        0.3733118000000104,
+        0.3692254999996294
+      ],
+      "analysis_seconds": [
+        0.11333200000080978,
+        0.1172086999995372,
+        0.13146509999933187,
+        0.11467269999957352,
+        0.12333180000041466,
+        0.12609359999987646,
+        0.11123599999973521
+      ],
+      "decode_median_seconds": 0.37219440000080795,
+      "analysis_median_seconds": 0.1172086999995372,
+      "packets_per_second_observed": 53735.35980110551
+    }
+  ]
+}

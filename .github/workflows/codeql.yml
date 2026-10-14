@@ -1,0 +1,61 @@
+# Jason Stys: supported Python security-extended analysis; no CodeQL database artifact upload.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: name — line 33
+# parameter: on — line 34
+# parameter: push — line 35
+# parameter: branches — line 36
+# parameter: pull_request — line 37
+# parameter: workflow_dispatch — line 38
+# parameter: permissions — line 39
+# parameter: contents — line 40
+# parameter: jobs — line 41
+# parameter: analyze — line 42
+# parameter: name — line 43
+# parameter: runs-on — line 44
+# parameter: timeout-minutes — line 45
+# parameter: permissions — line 46
+# parameter: contents — line 47
+# parameter: security-events — line 48
+# parameter: actions — line 49
+# parameter: steps — line 50
+# parameter: uses — line 51
+# parameter: with — line 52
+# parameter: persist-credentials — line 53
+# parameter: uses — line 54
+# parameter: with — line 55
+# parameter: languages — line 56
+# parameter: queries — line 57
+# parameter: build-mode — line 58
+# parameter: uses — line 59
+# parameter: with — line 60
+# parameter: upload-database — line 61
+# END CODE MAP
+name: CodeQL
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  analyze:
+    name: CodeQL / Python
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4
+        with:
+          languages: python
+          queries: security-extended
+          build-mode: none
+      - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4
+        with:
+          upload-database: false

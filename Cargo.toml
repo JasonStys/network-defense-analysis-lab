@@ -1,0 +1,21 @@
+# Jason Stys: dependency-free bounded offline packet decoder and native mutation tests.
+[package]
+name = "network-defense-analysis-lab"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.98"
+authors = ["Jason Stys"]
+license = "MIT"
+description = "Bounded synthetic network evidence analysis; no live capture or scanning"
+[lib]
+path = "native/lib.rs"
+[[bin]]
+name = "packet-decoder"
+path = "native/main.rs"
+[profile.release]
+overflow-checks = true
+lto = "thin"
+[lints.rust]
+unsafe_code = "forbid"
+[lints.clippy]
+all = "deny"

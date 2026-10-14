@@ -1,0 +1,11 @@
+{
+  "window_seconds": 60,
+  "nxdomain_threshold": 8,
+  "port_threshold": 8,
+  "beacon_minimum": 6,
+  "beacon_jitter": 0.05,
+  "long_label": 40,
+  "entropy_bits": 4.2,
+  "allowed_connections": [],
+  "allowed_domains": []
+}

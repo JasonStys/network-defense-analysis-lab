@@ -1,0 +1,19 @@
+# Jason Stys: keep captures, private evidence, local tooling and generated builds off GitHub.
+out/
+target/
+.venv/
+.tools/
+__pycache__/
+*.pyc
+.coverage*
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+*.pcap
+*.pcapng
+*.sqlite*
+*.db
+*.env
+*.pem
+*.key
