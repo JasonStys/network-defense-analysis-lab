@@ -86,6 +86,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/release.md](docs/release.md) | Release and maintenance checklist. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured synthetic Windows benchmark snapshot, not a throughput promise. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source CI job snapshot, not a future guarantee. |
+| [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and accepted-source evidence. |
 | [docs/research.md](docs/research.md) | Primary research and implementation rationale. |
 | [docs/security.md](docs/security.md) | Threat model and security policy. |
