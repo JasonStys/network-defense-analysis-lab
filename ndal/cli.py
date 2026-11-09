@@ -1,46 +1,47 @@
 """Jason Stys: local bounded file analysis, synthetic demo generation and private no-overwrite evidence output."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 65
-# definition: read — line 68
-# parameter: maximum — line 68
-# parameter: path — line 68
-# variable: stream — line 72
-# variable: data — line 73
-# definition: write — line 79
-# parameter: data — line 79
-# parameter: path — line 79
-# variable: descriptor — line 81
-# variable: stream — line 82
-# definition: decode — line 86
-# parameter: data — line 86
-# variable: executable — line 88
-# variable: directory — line 100
-# variable: snapshot — line 101
-# variable: completed — line 103
-# definition: analyze — line 117
-# parameter: args — line 117
-# variable: settings — line 121
-# variable: events — line 124
-# variable: issues — line 125
-# variable: digests — line 126
-# variable: data — line 128
-# variable: _ — line 131
-# variable: events — line 131
-# variable: issues — line 131
-# variable: data — line 133
-# variable: events — line 135
-# variable: findings — line 136
-# variable: value — line 137
-# variable: connection — line 138
-# variable: target — line 155
-# definition: main — line 164
-# parameter: argv — line 164
-# variable: parser — line 166
-# variable: commands — line 169
-# variable: demo — line 170
-# variable: analysis — line 174
-# variable: args — line 182
-# variable: case — line 186
+# variable: ROOT — line 67
+# definition: read — line 70
+# parameter: maximum — line 70
+# parameter: path — line 70
+# variable: stream — line 74
+# variable: data — line 75
+# definition: write — line 81
+# parameter: data — line 81
+# parameter: path — line 81
+# variable: descriptor — line 83
+# variable: stream — line 84
+# definition: decode — line 88
+# parameter: data — line 88
+# variable: executable — line 90
+# variable: directory — line 102
+# variable: snapshot — line 103
+# variable: completed — line 105
+# definition: analyze — line 119
+# parameter: args — line 119
+# variable: settings — line 123
+# variable: events — line 126
+# variable: issues — line 127
+# variable: digests — line 128
+# variable: data — line 130
+# variable: _ — line 133
+# variable: events — line 133
+# variable: issues — line 133
+# variable: data — line 135
+# variable: events — line 137
+# variable: findings — line 138
+# variable: value — line 139
+# variable: connection — line 140
+# variable: selected — line 156
+# variable: target — line 177
+# definition: main — line 186
+# parameter: argv — line 186
+# variable: parser — line 188
+# variable: commands — line 191
+# variable: demo — line 192
+# variable: analysis — line 196
+# variable: args — line 216
+# variable: case — line 220
 # END CODE MAP
 
 from __future__ import annotations
@@ -58,6 +59,7 @@ from pathlib import Path
 
 from ndal.detect import detect, policy
 from ndal.model import MAX_INPUT, Event, Issue, logs, native, unique_object
+from ndal.query import query
 from ndal.report import document, render
 from ndal.store import database, search
 from ndal.synthetic import CASES, log_sample, scenario
@@ -150,6 +152,26 @@ def analyze(args: argparse.Namespace) -> None:
             ).encode(),
         )
         write(args.output / "report.html", render(value).encode())
+        if args.query:
+            selected = query(
+                events,
+                issues,
+                findings,
+                start_ns=args.query_start_ns,
+                end_ns=args.query_end_ns,
+                protocol=args.query_protocol,
+                rule=args.query_rule,
+                severity=args.query_severity,
+                cursor=args.query_cursor,
+                limit=args.query_limit,
+            )
+            write(
+                args.output / "query.json",
+                json.dumps(
+                    selected, sort_keys=True, indent=2, allow_nan=False
+                ).encode(),
+            )
+            write(args.output / "query.html", render(selected).encode())
         # SQLite backup uses a new exclusive file; reports retain metadata, never packet payload.
         write(args.output / "evidence.sqlite", b"")
         with closing(sqlite3.connect(args.output / "evidence.sqlite")) as target:
@@ -179,6 +201,18 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--policy", type=Path, default=ROOT / "config/default.json")
     analysis.add_argument("--output", type=Path, required=True)
     analysis.add_argument("--search", help="exact IPv4/hostname evidence search")
+    analysis.add_argument(
+        "--query",
+        action="store_true",
+        help="write bounded filtered analyst evidence page",
+    )
+    analysis.add_argument("--query-start-ns", type=int, default=0)
+    analysis.add_argument("--query-end-ns", type=int, default=2**63 - 1)
+    analysis.add_argument("--query-protocol", choices=("udp", "tcp"))
+    analysis.add_argument("--query-rule")
+    analysis.add_argument("--query-severity", choices=("review", "coverage"))
+    analysis.add_argument("--query-cursor")
+    analysis.add_argument("--query-limit", type=int, default=100)
     args = parser.parse_args(argv)
     try:
         if args.command == "demo":
