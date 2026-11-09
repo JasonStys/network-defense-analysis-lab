@@ -34,6 +34,16 @@ Open the generated report.html locally in a browser. This example produces two r
 
 For setup, configuration, log format, troubleshooting and analyst workflow, see [usage](docs/usage.md). For explicit supported limits and omissions, see [contracts](docs/contracts.md). [Validation evidence](docs/reports/validation.md) distinguishes local results from CI.
 
+## Analyst drilldown and stable pages
+
+```text
+python -m ndal.cli analyze --capture out/demo/dns_burst.pcap --logs out/demo/connections.jsonl --output out/query-first --query --query-rule dns_nxdomain_burst --query-protocol udp --query-severity review --query-limit 2
+```
+
+Open `query.html` or read `query.json` for exact nanosecond time/protocol/rule/severity filters, matched counts, original finding rationale and event IDs. Add inclusive `--query-start-ns` / `--query-end-ns` limits. For another page, rerun against the **same** inputs/policy/filters in a new directory with `--query-cursor <next_cursor>`. Equal timestamps use event ID as a stable tie-break. A cursor from changed evidence or filters is rejected.
+
+Detections always run against the complete normalized input snapshot, then references are filtered; they are never recomputed on an artificially small page. Original detector evidence references can be capped at100; the full finding count stays visible and is not a claim that a page contains all related packets. Capture quality issues have no reliable event timestamps and remain visible as `capture_issues_unfiltered`, even on empty pages. A query is a human review aid, not proof of absence, attribution or live capture. No network/device interface is added.
+
 ## Validate
 
 Create and activate a Python virtual environment, then:
@@ -87,6 +97,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured synthetic Windows benchmark snapshot, not a throughput promise. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source CI job snapshot, not a future guarantee. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/query-2026-11-09.md](docs/reports/query-2026-11-09.md) | Snapshot-bound analyst drilldown validation — November 9, 2026. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and accepted-source evidence. |
 | [docs/research.md](docs/research.md) | Primary research and implementation rationale. |
 | [docs/security.md](docs/security.md) | Threat model and security policy. |
@@ -99,6 +110,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [ndal/cli.py](ndal/cli.py) | Jason Stys: local bounded file analysis, synthetic demo generation and private no-overwrite evidence output. |
 | [ndal/detect.py](ndal/detect.py) | Jason Stys: bounded explainable DNS/window/fan-out/periodicity hypotheses with scoped allowlists. |
 | [ndal/model.py](ndal/model.py) | Jason Stys: strict immutable metadata models and native TSV/network-log trust boundaries. |
+| [ndal/query.py](ndal/query.py) | Jason Stys: snapshot-bound analyst evidence drilldown with stable keyset pages and visible capture gaps. |
 | [ndal/report.py](ndal/report.py) | Jason Stys: deterministic machine-readable and escaped inert HTML analyst reports, no active content. |
 | [ndal/store.py](ndal/store.py) | Jason Stys: transactional metadata-only SQLite evidence store and parameterized search. |
 | [ndal/synthetic.py](ndal/synthetic.py) | Jason Stys: deterministic synthetic wire/log fixtures with reserved addresses; never sends traffic. |
@@ -116,6 +128,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [sql/search.sql](sql/search.sql) | Jason Stys: exact source/hostname search uses bound values, never interpolated SQL or wildcard guesses. |
 | [tests/test\_contracts.py](tests/test_contracts.py) | Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests. |
 | [tests/test\_pipeline.py](tests/test_pipeline.py) | Jason Stys: real Rust subprocess, labeled scenario, CLI privacy, evidence SQL and report integration tests. |
+| [tests/test\_query.py](tests/test_query.py) | Jason Stys: independent keyset query, detector scope and capture-gap regression cases. |
 | [tools.lock.json](tools.lock.json) | Official scanner versions, release URLs and pinned SHA256 digests. |
 
 <!-- END FILE GUIDE -->
