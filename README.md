@@ -132,6 +132,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [sql/search.sql](sql/search.sql) | Jason Stys: exact source/hostname search uses bound values, never interpolated SQL or wildcard guesses. |
 | [tests/test\_contracts.py](tests/test_contracts.py) | Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests. |
 | [tests/test\_pipeline.py](tests/test_pipeline.py) | Jason Stys: real Rust subprocess, labeled scenario, CLI privacy, evidence SQL and report integration tests. |
+| [tests/test\_publication\_policy.py](tests/test_publication_policy.py) | Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions. |
 | [tests/test\_query.py](tests/test_query.py) | Jason Stys: independent keyset query, detector scope and capture-gap regression cases. |
 | [tools.lock.json](tools.lock.json) | Official scanner versions, release URLs and pinned SHA256 digests. |
 
