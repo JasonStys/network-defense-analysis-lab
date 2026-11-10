@@ -1,17 +1,29 @@
 """Jason Stys: private-evidence exclusion, exact links/pins and dependency-free/offline runtime gates."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 23
-# definition: main — line 26
-# variable: names — line 28
-# variable: name — line 35
-# variable: path — line 36
-# variable: text — line 42
-# variable: target — line 47
-# variable: action — line 53
-# variable: word — line 57
-# variable: word — line 71
-# variable: graph — line 78
-# variable: tool — line 84
+# variable: ROOT — line 36
+# definition: public_text — line 39
+# parameter: path — line 39
+# variable: package — line 43
+# variable: members — line 44
+# variable: member — line 45
+# variable: names — line 45
+# variable: member — line 49
+# variable: item — line 54
+# variable: inspected — line 58
+# variable: member — line 59
+# variable: member — line 61
+# variable: member — line 65
+# definition: main — line 68
+# variable: names — line 70
+# variable: name — line 77
+# variable: path — line 78
+# variable: text — line 84
+# variable: target — line 89
+# variable: action — line 95
+# variable: word — line 99
+# variable: word — line 113
+# variable: graph — line 120
+# variable: tool — line 126
 # END CODE MAP
 
 import json
@@ -19,8 +31,38 @@ import re
 import subprocess
 import tomllib
 from pathlib import Path
+from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def public_text(path: Path) -> str:
+    """Inspect all XML/relationships in the one authored Word path; unknown binary files still fail closed."""
+    if path.relative_to(ROOT).as_posix() != "docs/reports/project-guide.docx":
+        return path.read_text(encoding="utf-8")
+    with ZipFile(path) as package:
+        members = package.infolist()
+        names = [member.filename for member in members]
+        if (
+            len(members) > 256
+            or len(set(names)) != len(names)
+            or sum(member.file_size for member in members) > 8 * 1024 * 1024
+            or "word/document.xml" not in names
+            or "[Content_Types].xml" not in names
+            or any(
+                "vbaProject" in item or item.startswith("word/embeddings/")
+                for item in names
+            )
+        ):
+            raise ValueError("Invalid or unsupported reviewed Word package")
+        inspected = [
+            member for member in members if member.filename.endswith((".xml", ".rels"))
+        ]
+        if sum(member.file_size for member in inspected) > 2 * 1024 * 1024:
+            raise ValueError("Reviewed Word XML exceeds inspection budget")
+        if package.testzip() is not None:
+            raise ValueError("Reviewed Word package integrity failed")
+        return "\n".join(package.read(member).decode("utf-8") for member in inspected)
 
 
 def main() -> None:
@@ -39,10 +81,10 @@ def main() -> None:
         assert not re.search(
             r"\.(?:pem|key|token|env|pcap|pcapng|db|sqlite)(?:$|[.-])", name
         )
-        text = path.read_text(encoding="utf-8")
+        text = public_text(path)
         assert not re.search(
             r"(?:ghp_|github_pat_)[A-Za-z0-9]{20,}|BEGIN [A-Z ]*PRIVATE KEY", text
-        )
+        ), "possible credential in tracked source"
         if name.endswith(".md"):
             for target in re.findall(r"\]\(([^)]+)\)", text):
                 if not target.startswith(("http:", "https:", "#", "mailto:")):

@@ -4,22 +4,22 @@
 # variable: BEGIN — line 31
 # variable: END — line 31
 # variable: SPECIAL — line 32
-# definition: purpose — line 45
-# parameter: name — line 45
-# variable: text — line 49
-# variable: line — line 54
-# definition: main — line 60
-# variable: parser — line 62
-# variable: args — line 64
-# variable: names — line 65
-# variable: rows — line 73
-# variable: name — line 74
-# variable: label — line 75
-# variable: path — line 77
-# variable: original — line 78
-# variable: end — line 79
-# variable: start — line 79
-# variable: expected — line 80
+# definition: purpose — line 47
+# parameter: name — line 47
+# variable: text — line 51
+# variable: line — line 56
+# definition: main — line 62
+# variable: parser — line 64
+# variable: args — line 66
+# variable: names — line 67
+# variable: rows — line 75
+# variable: name — line 76
+# variable: label — line 77
+# variable: path — line 79
+# variable: original — line 80
+# variable: end — line 81
+# variable: start — line 81
+# variable: expected — line 82
 # END CODE MAP
 
 import argparse
@@ -30,6 +30,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "docs/reports/project-guide.docx": "Reviewed Word project guide bound to the documented source revision.",
+    "docs/reports/publications.json": "Exact Office digests, visual review scopes and immutable source baselines.",
     ".gitignore": "Exclude private captures, evidence, local environments and generated builds.",
     ".gitattributes": "Consistent LF text checkouts across operating systems.",
     "Cargo.lock": "Complete dependency-free native package graph, checked with --locked.",
