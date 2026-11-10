@@ -92,11 +92,15 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [config/default.json](config/default.json) | Strict tunable detection thresholds with empty explicitly scoped allowlists. |
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: bounded offline evidence. |
 | [docs/contracts.md](docs/contracts.md) | Parser, evidence and detection contracts. |
+| [docs/handbook.md](docs/handbook.md) | Network Defense Analysis Lab handbook. |
 | [docs/performance.md](docs/performance.md) | Complexity and benchmark methodology. |
 | [docs/release.md](docs/release.md) | Release and maintenance checklist. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured synthetic Windows benchmark snapshot, not a throughput promise. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source CI job snapshot, not a future guarantee. |
+| [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed Word project guide bound to the documented source revision. |
+| [docs/reports/publications.json](docs/reports/publications.json) | Exact Office digests, visual review scopes and immutable source baselines. |
 | [docs/reports/query-2026-11-09.md](docs/reports/query-2026-11-09.md) | Snapshot-bound analyst drilldown validation — November 9, 2026. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and accepted-source evidence. |
 | [docs/research.md](docs/research.md) | Primary research and implementation rationale. |
@@ -134,3 +138,9 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 <!-- END FILE GUIDE -->
 
 MIT licensed. Educational assurance is not a certification, production IDS, compliance attestation or substitute for an authorized security assessment.
+
+## Documentation editions
+
+Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx).
+
+[Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.

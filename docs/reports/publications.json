@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "project": "network-defense-analysis-lab",
+  "author": "Jason Stys",
+  "editionDate": "2026-11-09",
+  "sourceBaseline": "6f474420416bd319f2384737c8764adf115c2861",
+  "sourceUrl": "https://github.com/JasonStys/network-defense-analysis-lab/tree/6f474420416bd319f2384737c8764adf115c2861",
+  "functionalEvidenceBaseline": "6f474420416bd319f2384737c8764adf115c2861",
+  "evidenceObservedAt": "2026-11-10T05:25:40.628667+00:00",
+  "workflowEvidence": [
+    {
+      "conclusion": "success",
+      "databaseId": 42710461021,
+      "event": "push",
+      "headSha": "6f474420416bd319f2384737c8764adf115c2861",
+      "name": "CodeQL",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/42710461021"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 42710460907,
+      "event": "push",
+      "headSha": "6f474420416bd319f2384737c8764adf115c2861",
+      "name": "Validate",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/network-defense-analysis-lab/actions/runs/42710460907"
+    }
+  ],
+  "summary": "Filter captured events by exact UTC/protocol/rule/severity with snapshot/query-bound pagination and persistent visibility of capture gaps.",
+  "rationale": "Makes defensive investigation manageable without presenting filtered or incomplete captures as clean traffic.",
+  "limitations": [
+    "The original 100-item detector evidence cap remains; a filtered event page does not include every related packet.",
+    "Capture-quality issues lack reliable timestamps and remain visible outside event time filters.",
+    "No live capture, blocking or attribution is supplied; no findings is not proof of safe traffic."
+  ],
+  "documents": [
+    {
+      "filename": "project-guide.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 43838,
+      "sha256": "00be58c2bd939f099a27e81db4f5a849dacb420ed692c22745625cafc34e65d9",
+      "sourceBaseline": "6f474420416bd319f2384737c8764adf115c2861",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 4,
+        "renderedPageSha256": {
+          "page-1.png": "70b34619e581feba61f43bde9541afe3ae7842fd722181295db0bc4a2fa8fb92",
+          "page-2.png": "7a48879c92138be5bff179c9ae7f96d2a43649c91fa31f0edf25d5044d40fe6e",
+          "page-3.png": "8c672d8b1a4bdf07351403e4f085285f8e0ef849de9cfa93a852e14492319e98",
+          "page-4.png": "687aedc8896790c4bcd41becf1648bc6635bfc76696d2f7f5e0b43d078a430a7"
+        }
+      }
+    }
+  ],
+  "scope": "Reviewed documentation editions of the cited source. Checksums identify bytes, not authorship. Historical measurements retain their own dates; integration CI must be checked separately."
+}
