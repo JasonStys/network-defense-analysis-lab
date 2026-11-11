@@ -114,6 +114,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured synthetic Windows benchmark snapshot, not a throughput promise. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source CI job snapshot, not a future guarantee. |
 | [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
+| [docs/reports/installed-windows-1.1.0-2026-11-11.md](docs/reports/installed-windows-1.1.0-2026-11-11.md) | Installed Windows 1.1.0 validation · 11 November 2026. |
 | [docs/reports/native-workbench-2026-11-11.md](docs/reports/native-workbench-2026-11-11.md) | Native workbench validation — November 11, 2026. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
 | [docs/reports/profile-admission-2026-11-11.md](docs/reports/profile-admission-2026-11-11.md) | Native profile admission — November 11, 2026. |
@@ -121,6 +122,8 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact Office digests, visual review scopes and immutable source baselines. |
 | [docs/reports/query-2026-11-09.md](docs/reports/query-2026-11-09.md) | Snapshot-bound analyst drilldown validation — November 9, 2026. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and accepted-source evidence. |
+| [docs/reports/windows-application-guide-1.1.0.docx](docs/reports/windows-application-guide-1.1.0.docx) | Current illustrated installed workbench guide with two real screenshots, exact source code and measured limits. |
+| [docs/reports/windows-application-guide-1.1.0.json](docs/reports/windows-application-guide-1.1.0.json) | Current Word, screenshot, source and individually reviewed rendered-page digests. |
 | [docs/research.md](docs/research.md) | Primary research and implementation rationale. |
 | [docs/security.md](docs/security.md) | Threat model and security policy. |
 | [docs/testing.md](docs/testing.md) | Testing strategy and acceptance gates. |
@@ -161,6 +164,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [sql/schema.sql](sql/schema.sql) | Jason Stys: strict transactional metadata-only evidence schema with indexed human-review searches. |
 | [sql/search.sql](sql/search.sql) | Jason Stys: exact source/hostname search uses bound values, never interpolated SQL or wildcard guesses. |
 | [tests/test\_contracts.py](tests/test_contracts.py) | Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests. |
+| [tests/test\_current\_word\_publication.py](tests/test_current_word_publication.py) | Jason Stys: actual current Word XML remains inspected; unknown binary documents are not excluded. |
 | [tests/test\_desktop\_gui.py](tests/test_desktop_gui.py) | Presentation-adapter unit tests with real core/SQLite workers; real widgets are separately frozen-tested. Jason Stys. |
 | [tests/test\_desktop\_project.py](tests/test_desktop_project.py) | Independent actual Rust/detector/SQLite/native-adapter and saved cursor oracles. Jason Stys. |
 | [tests/test\_desktop\_state.py](tests/test_desktop_state.py) | Independent offline desktop ownership, byte-bound, SQLite and non-overwrite regressions. Jason Stys. |
@@ -180,3 +184,13 @@ MIT licensed. Educational assurance is not a certification, production IDS, comp
 Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx).
 
 [Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
+
+## Current Windows application guide
+
+The published **1.1.0** app has a [four-page illustrated guide](docs/reports/windows-application-guide-1.1.0.docx) with actual installed screenshots, a worked user journey, important source excerpts and operating limits. Read the [installed validation report](docs/reports/installed-windows-1.1.0-2026-11-11.md) and [byte/page review manifest](docs/reports/windows-application-guide-1.1.0.json) for exact scope. Historical Office editions remain unchanged.
+
+Added documentation:
+
+- [docs/reports/windows-application-guide-1.1.0.docx](docs/reports/windows-application-guide-1.1.0.docx): installed application use, screenshots, source and measured validation.
+- [docs/reports/windows-application-guide-1.1.0.json](docs/reports/windows-application-guide-1.1.0.json): exact Word, screenshot, immutable code and reviewed-page hashes.
+- [docs/reports/installed-windows-1.1.0-2026-11-11.md](docs/reports/installed-windows-1.1.0-2026-11-11.md): observed installed workflows, distribution identity, data preservation and practical limits.
