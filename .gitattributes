@@ -1,2 +1,5 @@
 * text=auto eol=lf
+# Preserve the exact upstream legal inventory, including its authored whitespace.
+# All text remains inspected by repository privacy/reference checks.
+licenses/RUST-COPYRIGHT-library.html -text -whitespace
 *.docx binary

@@ -1,5 +1,9 @@
 # Network Defense Analysis Lab handbook
 
+For the graphical Windows application, start with the [native workbench guide](native-workbench.md)
+and its [dated acceptance report](reports/native-workbench-2026-11-11.md). Existing
+CLI usage and historical publication editions below retain their own source/date.
+
 By Jason Stys.
 
 Analyze bounded defensive network observations, correlate declared relationships and explain prioritization using reproducible fixtures. The lab does not scan external targets or perform traffic interception.

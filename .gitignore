@@ -17,3 +17,7 @@ __pycache__/
 *.env
 *.pem
 *.key
+
+# Native candidates and synthetic local acceptance state, never public app data.
+release/
+*.spec

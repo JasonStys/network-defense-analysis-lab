@@ -20,6 +20,20 @@ A defensive, offline portfolio lab that turns bounded **synthetic packet capture
 
 ## Run locally
 
+### Graphical Windows workbench
+
+The native workbench runs the real Rust/Python/SQLite pipeline with editable
+authorized PCAP/log/policy controls, exact searches, stable evidence pages and
+durable owner-local history. Its prepared fictional scenarios are inputs inside
+this same application. The portable build includes its runtime and needs no user
+compiler or command setup. Read the [native workflow, privacy and build guide](docs/native-workbench.md).
+The current source recipe and actual packaged acceptance are recorded separately
+from publication in the [native validation report](docs/reports/native-workbench-2026-11-11.md).
+The [profile admission review](docs/reports/profile-admission-2026-11-11.md)
+explains linked-state refusal and retained ordinary SQLite recovery.
+
+### Existing command line
+
 Requires Python 3.12–3.14 and the pinned Rust 1.98.1 toolchain (rustup). On Windows Rust's MSVC toolchain also needs Microsoft's C++ build tools. Building needs development tools, not administrator/network-capture privileges. The Python application runtime has no pip dependencies.
 
 Use these commands from the repository root, in PowerShell or a POSIX shell:
@@ -69,7 +83,8 @@ CI also runs the entire locked development dependency audit, pinned Gitleaks/act
 
 ## Design and navigation
 
-~10 lines of commands are enough to demonstrate the pipeline; there is deliberately no UI framework, server or capture driver. Read the [architecture decision](docs/architecture.md), [testing strategy](docs/testing.md), [threat model/security policy](docs/security.md), [performance methodology](docs/performance.md) and [primary research](docs/research.md).
+The existing CLI stays available alongside the owner-local Tk workbench. Neither
+interface adds a network server or capture driver. Read the [architecture decision](docs/architecture.md), [testing strategy](docs/testing.md), [threat model/security policy](docs/security.md), [performance methodology](docs/performance.md) and [primary research](docs/research.md).
 
 Every code file has an authored purpose plus CI-checked generated symbol/variable line locations. Python uses AST parsing; Rust/SQL/workflow maps are lexical declaration indexes, independently checked by native compilers/tests or actionlint—not advertised as AST semantic analysis. Descriptive names and per-function/class doc comments document contracts without duplicating every expression in prose.
 
@@ -93,12 +108,15 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: bounded offline evidence. |
 | [docs/contracts.md](docs/contracts.md) | Parser, evidence and detection contracts. |
 | [docs/handbook.md](docs/handbook.md) | Network Defense Analysis Lab handbook. |
+| [docs/native-workbench.md](docs/native-workbench.md) | Native Network Defense Analysis Workbench. |
 | [docs/performance.md](docs/performance.md) | Complexity and benchmark methodology. |
 | [docs/release.md](docs/release.md) | Release and maintenance checklist. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured synthetic Windows benchmark snapshot, not a throughput promise. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source CI job snapshot, not a future guarantee. |
 | [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
+| [docs/reports/native-workbench-2026-11-11.md](docs/reports/native-workbench-2026-11-11.md) | Native workbench validation — November 11, 2026. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/profile-admission-2026-11-11.md](docs/reports/profile-admission-2026-11-11.md) | Native profile admission — November 11, 2026. |
 | [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed Word project guide bound to the documented source revision. |
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact Office digests, visual review scopes and immutable source baselines. |
 | [docs/reports/query-2026-11-09.md](docs/reports/query-2026-11-09.md) | Snapshot-bound analyst drilldown validation — November 9, 2026. |
@@ -107,12 +125,19 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/security.md](docs/security.md) | Threat model and security policy. |
 | [docs/testing.md](docs/testing.md) | Testing strategy and acceptance gates. |
 | [docs/usage.md](docs/usage.md) | Setup, analyst workflow and help. |
+| [examples/desktop/custom-policy.json](examples/desktop/custom-policy.json) | Actual higher DNS-burst threshold example used by the native workbench; narrow allowlists remain empty. |
+| [licenses/RUST-COPYRIGHT-library.html](licenses/RUST-COPYRIGHT-library.html) | Complete Rust1.98.1 standard-library copyright and dependency license notices from the actual pinned Windows toolchain, retained in portable notices. |
 | [native/lib.rs](native/lib.rs) | Jason Stys: bounded classic-PCAP/Ethernet/IPv4/UDP/TCP/DNS metadata decoder. |
 | [native/main.rs](native/main.rs) | Jason Stys: read one bounded regular capture file and emit safe versioned TSV metadata. |
 | [native/tests.rs](native/tests.rs) | Jason Stys: independent native wire fixtures, boundary tests and deterministic mutation fuzzing. |
 | [ndal/\_\_init\_\_.py](ndal/__init__.py) | Jason Stys: offline synthetic network evidence analysis, no runtime third-party packages. |
 | [ndal/cli.py](ndal/cli.py) | Jason Stys: local bounded file analysis, synthetic demo generation and private no-overwrite evidence output. |
+| [ndal/desktop.py](ndal/desktop.py) | Native offline workbench: real project inputs, analysis, searchable evidence, history and export. Jason Stys. |
+| [ndal/desktop\_io.py](ndal/desktop_io.py) | Bounded regular descriptor reads and strict finite JSON for owner-local desktop state. Jason Stys. |
+| [ndal/desktop\_project.py](ndal/desktop_project.py) | Actual offline packet/log analysis, stable saved-snapshot pages and SQL evidence review. Jason Stys. |
+| [ndal/desktop\_state.py](ndal/desktop_state.py) | Owner-local desktop profile, bounded durable bundles and non-overwriting export. Jason Stys. |
 | [ndal/detect.py](ndal/detect.py) | Jason Stys: bounded explainable DNS/window/fan-out/periodicity hypotheses with scoped allowlists. |
+| [ndal/inputs.py](ndal/inputs.py) | Bounded stable ordinary-file reads and streaming tool hashes for offline identity inputs. Jason Stys. |
 | [ndal/model.py](ndal/model.py) | Jason Stys: strict immutable metadata models and native TSV/network-log trust boundaries. |
 | [ndal/query.py](ndal/query.py) | Jason Stys: snapshot-bound analyst evidence drilldown with stable keyset pages and visible capture gaps. |
 | [ndal/report.py](ndal/report.py) | Jason Stys: deterministic machine-readable and escaped inert HTML analyst reports, no active content. |
@@ -121,17 +146,27 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [pyproject.toml](pyproject.toml) | Jason Stys: strict Python tooling and all-runtime-module branch/statement coverage. |
 | [requirements-dev.in](requirements-dev.in) | Jason Stys: exact development-only tools; Python runtime uses only the standard library. |
 | [requirements-dev.lock](requirements-dev.lock) | Full universal hash-locked Python development dependency graph. |
+| [requirements-native.lock](requirements-native.lock) | Exact hash-locked Windows freezer tool graph; no runtime package installation at application launch. |
 | [rust-toolchain.toml](rust-toolchain.toml) | Jason Stys: reproducible tested compiler; no automatic floating stable toolchain. |
 | [scripts/benchmark.py](scripts/benchmark.py) | Jason Stys: reproducible bounded release-decoder and analysis timings; no universal performance claims. |
+| [scripts/build\_native.py](scripts/build_native.py) | Build the complete real offline workbench as one Windows portable executable. Jason Stys. |
 | [scripts/code\_map.py](scripts/code_map.py) | Jason Stys: generate exact definition/variable line maps and verify Python function/class contracts. |
 | [scripts/differential.py](scripts/differential.py) | Jason Stys: independent libpcap/tcpdump fixture conformance, synthetic files only and no live interfaces. |
 | [scripts/file\_guide.py](scripts/file_guide.py) | Jason Stys: exact tracked-file README purpose inventory, unknown files fail rather than receive guesses. |
+| [scripts/native\_acceptance.py](scripts/native_acceptance.py) | Actual frozen Tk widgets, Rust decoder, SQLite paging and persisted export acceptance. Jason Stys. |
+| [scripts/native\_entry.py](scripts/native_entry.py) | Launch the actual bundled offline project workbench; no setup shell commands. Jason Stys. |
 | [scripts/scanners.py](scripts/scanners.py) | Install only hash-pinned official Linux scanner binaries. Created by Jason Stys. |
+| [scripts/test\_native\_app.py](scripts/test_native_app.py) | Run the real frozen workbench twice with an owned synthetic profile and exact bundle persistence. Jason Stys. |
 | [scripts/validate\_repo.py](scripts/validate_repo.py) | Jason Stys: private-evidence exclusion, exact links/pins and dependency-free/offline runtime gates. |
 | [sql/schema.sql](sql/schema.sql) | Jason Stys: strict transactional metadata-only evidence schema with indexed human-review searches. |
 | [sql/search.sql](sql/search.sql) | Jason Stys: exact source/hostname search uses bound values, never interpolated SQL or wildcard guesses. |
 | [tests/test\_contracts.py](tests/test_contracts.py) | Jason Stys: fail-closed wire/log/policy contracts, boundary semantics and bounded evidence property tests. |
+| [tests/test\_desktop\_gui.py](tests/test_desktop_gui.py) | Presentation-adapter unit tests with real core/SQLite workers; real widgets are separately frozen-tested. Jason Stys. |
+| [tests/test\_desktop\_project.py](tests/test_desktop_project.py) | Independent actual Rust/detector/SQLite/native-adapter and saved cursor oracles. Jason Stys. |
+| [tests/test\_desktop\_state.py](tests/test_desktop_state.py) | Independent offline desktop ownership, byte-bound, SQLite and non-overwrite regressions. Jason Stys. |
+| [tests/test\_native\_inputs.py](tests/test_native_inputs.py) | Actual descriptor identity, FIFO availability, resource bounds and minimal native environment. Jason Stys. |
 | [tests/test\_pipeline.py](tests/test_pipeline.py) | Jason Stys: real Rust subprocess, labeled scenario, CLI privacy, evidence SQL and report integration tests. |
+| [tests/test\_profile\_admission.py](tests/test_profile_admission.py) | Actual pre-existing alias refusal and ordinary SQLite recovery continuity. Jason Stys. |
 | [tests/test\_publication\_policy.py](tests/test_publication_policy.py) | Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions. |
 | [tests/test\_query.py](tests/test_query.py) | Jason Stys: independent keyset query, detector scope and capture-gap regression cases. |
 | [tools.lock.json](tools.lock.json) | Official scanner versions, release URLs and pinned SHA256 digests. |

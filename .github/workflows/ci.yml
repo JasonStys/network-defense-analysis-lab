@@ -1,80 +1,95 @@
 # Jason Stys: cross-platform bounded native/evidence assurance; no uploaded artifacts or Actions caches.
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# parameter: name — line 79
-# parameter: on — line 80
-# parameter: push — line 81
-# parameter: branches — line 82
-# parameter: pull_request — line 83
-# parameter: workflow_dispatch — line 84
-# parameter: permissions — line 85
-# parameter: contents — line 86
-# parameter: concurrency — line 87
-# parameter: group — line 88
-# parameter: cancel-in-progress — line 89
-# parameter: jobs — line 90
-# parameter: quality — line 91
-# parameter: name — line 92
-# parameter: runs-on — line 93
-# parameter: timeout-minutes — line 94
-# parameter: strategy — line 95
-# parameter: fail-fast — line 96
-# parameter: matrix — line 97
-# parameter: include — line 98
-# parameter: steps — line 103
-# parameter: uses — line 104
-# parameter: with — line 105
-# parameter: persist-credentials — line 106
-# parameter: uses — line 107
-# parameter: with — line 108
-# parameter: python-version — line 109
-# parameter: run — line 110
-# parameter: run — line 111
-# parameter: run — line 112
-# parameter: run — line 113
-# parameter: run — line 114
-# parameter: run — line 115
-# parameter: run — line 116
-# parameter: run — line 117
-# parameter: run — line 118
-# parameter: run — line 119
-# parameter: run — line 120
-# parameter: run — line 121
-# parameter: run — line 122
-# parameter: run — line 123
-# parameter: conformance — line 124
-# parameter: name — line 125
-# parameter: runs-on — line 126
-# parameter: timeout-minutes — line 127
-# parameter: steps — line 128
-# parameter: uses — line 129
-# parameter: with — line 130
-# parameter: persist-credentials — line 131
-# parameter: uses — line 132
-# parameter: with — line 133
-# parameter: python-version — line 134
+# parameter: name — line 94
+# parameter: on — line 95
+# parameter: push — line 96
+# parameter: branches — line 97
+# parameter: pull_request — line 98
+# parameter: workflow_dispatch — line 99
+# parameter: permissions — line 100
+# parameter: contents — line 101
+# parameter: concurrency — line 102
+# parameter: group — line 103
+# parameter: cancel-in-progress — line 104
+# parameter: jobs — line 105
+# parameter: quality — line 106
+# parameter: name — line 107
+# parameter: runs-on — line 108
+# parameter: timeout-minutes — line 109
+# parameter: strategy — line 110
+# parameter: fail-fast — line 111
+# parameter: matrix — line 112
+# parameter: include — line 113
+# parameter: steps — line 118
+# parameter: uses — line 119
+# parameter: with — line 120
+# parameter: persist-credentials — line 121
+# parameter: uses — line 122
+# parameter: with — line 123
+# parameter: python-version — line 124
+# parameter: run — line 125
+# parameter: run — line 126
+# parameter: run — line 127
+# parameter: run — line 128
+# parameter: run — line 129
+# parameter: run — line 130
+# parameter: run — line 131
+# parameter: run — line 132
+# parameter: run — line 133
+# parameter: run — line 134
 # parameter: run — line 135
 # parameter: run — line 136
 # parameter: run — line 137
 # parameter: run — line 138
-# parameter: run — line 139
-# parameter: security — line 140
-# parameter: name — line 141
-# parameter: runs-on — line 142
-# parameter: timeout-minutes — line 143
-# parameter: steps — line 144
-# parameter: uses — line 145
-# parameter: with — line 146
-# parameter: persist-credentials — line 147
-# parameter: fetch-depth — line 148
-# parameter: uses — line 149
-# parameter: with — line 150
-# parameter: python-version — line 151
+# parameter: conformance — line 139
+# parameter: name — line 140
+# parameter: runs-on — line 141
+# parameter: timeout-minutes — line 142
+# parameter: steps — line 143
+# parameter: uses — line 144
+# parameter: with — line 145
+# parameter: persist-credentials — line 146
+# parameter: uses — line 147
+# parameter: with — line 148
+# parameter: python-version — line 149
+# parameter: run — line 150
+# parameter: run — line 151
 # parameter: run — line 152
 # parameter: run — line 153
 # parameter: run — line 154
-# parameter: run — line 155
-# parameter: run — line 156
-# parameter: run — line 157
+# parameter: security — line 155
+# parameter: name — line 156
+# parameter: runs-on — line 157
+# parameter: timeout-minutes — line 158
+# parameter: steps — line 159
+# parameter: uses — line 160
+# parameter: with — line 161
+# parameter: persist-credentials — line 162
+# parameter: fetch-depth — line 163
+# parameter: uses — line 164
+# parameter: with — line 165
+# parameter: python-version — line 166
+# parameter: run — line 167
+# parameter: run — line 168
+# parameter: run — line 169
+# parameter: run — line 170
+# parameter: run — line 171
+# parameter: run — line 172
+# parameter: native-windows — line 173
+# parameter: name — line 174
+# parameter: runs-on — line 175
+# parameter: timeout-minutes — line 176
+# parameter: steps — line 177
+# parameter: uses — line 178
+# parameter: with — line 179
+# parameter: persist-credentials — line 180
+# parameter: uses — line 181
+# parameter: with — line 182
+# parameter: python-version — line 183
+# parameter: run — line 184
+# parameter: run — line 185
+# parameter: run — line 186
+# parameter: run — line 187
 # END CODE MAP
 name: Validate
 on:
@@ -150,8 +165,23 @@ jobs:
         with:
           python-version: '3.14'
       - run: python -m pip install --require-hashes -r requirements-dev.lock
-      - run: python -m pip_audit -r requirements-dev.lock --disable-pip --no-deps
+      - run: python -m pip_audit -r requirements-dev.lock -r requirements-native.lock --disable-pip --no-deps
       - run: python scripts/scanners.py gitleaks
       - run: python scripts/scanners.py actionlint
       - run: .tools/gitleaks git . --redact --no-banner
       - run: .tools/actionlint
+  native-windows:
+    name: Native Windows portable / patched Python3.14.10
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14.10'
+      - run: rustup toolchain install 1.98.1 --profile minimal
+      - run: python -m pip install --require-hashes -r requirements-dev.lock -r requirements-native.lock
+      - run: python scripts/build_native.py
+      - run: python scripts/test_native_app.py

@@ -1,5 +1,12 @@
 # Architecture and ADR-001: bounded offline evidence
 
+The native workbench adds an actual Tk presentation adapter around these same
+decoder, detector, SQL and query modules. One background worker receives captured
+visible parameters; only the main Tk thread touches widgets. Completed bundles
+enter a bounded owner-local SQLite history atomically. Saved-snapshot paging uses
+the complete original events and findings, never detections recomputed on a page.
+The existing CLI keeps its explicit custom paths. See [native boundaries](native-workbench.md).
+
 Status: accepted. Author: Jason Stys. Scope: standalone defensive portfolio lab, not a network sensor.
 
 ## Responsibilities and trust boundaries

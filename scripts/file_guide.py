@@ -4,22 +4,22 @@
 # variable: BEGIN — line 31
 # variable: END — line 31
 # variable: SPECIAL — line 32
-# definition: purpose — line 47
-# parameter: name — line 47
-# variable: text — line 51
-# variable: line — line 56
-# definition: main — line 62
-# variable: parser — line 64
-# variable: args — line 66
-# variable: names — line 67
-# variable: rows — line 75
-# variable: name — line 76
-# variable: label — line 77
-# variable: path — line 79
-# variable: original — line 80
-# variable: end — line 81
-# variable: start — line 81
-# variable: expected — line 82
+# definition: purpose — line 50
+# parameter: name — line 50
+# variable: text — line 54
+# variable: line — line 59
+# definition: main — line 65
+# variable: parser — line 67
+# variable: args — line 69
+# variable: names — line 70
+# variable: rows — line 78
+# variable: name — line 79
+# variable: label — line 80
+# variable: path — line 82
+# variable: original — line 83
+# variable: end — line 84
+# variable: start — line 84
+# variable: expected — line 85
 # END CODE MAP
 
 import argparse
@@ -30,6 +30,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "licenses/RUST-COPYRIGHT-library.html": "Complete Rust1.98.1 standard-library copyright and dependency license notices from the actual pinned Windows toolchain, retained in portable notices.",
+    "examples/desktop/custom-policy.json": "Actual higher DNS-burst threshold example used by the native workbench; narrow allowlists remain empty.",
+    "requirements-native.lock": "Exact hash-locked Windows freezer tool graph; no runtime package installation at application launch.",
     "docs/reports/project-guide.docx": "Reviewed Word project guide bound to the documented source revision.",
     "docs/reports/publications.json": "Exact Office digests, visual review scopes and immutable source baselines.",
     ".gitignore": "Exclude private captures, evidence, local environments and generated builds.",

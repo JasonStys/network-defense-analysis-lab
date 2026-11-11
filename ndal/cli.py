@@ -1,47 +1,49 @@
 """Jason Stys: local bounded file analysis, synthetic demo generation and private no-overwrite evidence output."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 67
-# definition: read — line 70
-# parameter: maximum — line 70
-# parameter: path — line 70
-# variable: stream — line 74
-# variable: data — line 75
-# definition: write — line 81
-# parameter: data — line 81
-# parameter: path — line 81
-# variable: descriptor — line 83
-# variable: stream — line 84
-# definition: decode — line 88
-# parameter: data — line 88
-# variable: executable — line 90
-# variable: directory — line 102
-# variable: snapshot — line 103
-# variable: completed — line 105
-# definition: analyze — line 119
-# parameter: args — line 119
-# variable: settings — line 123
-# variable: events — line 126
-# variable: issues — line 127
-# variable: digests — line 128
-# variable: data — line 130
-# variable: _ — line 133
-# variable: events — line 133
-# variable: issues — line 133
-# variable: data — line 135
+# variable: ROOT — line 70
+# definition: read — line 73
+# parameter: maximum — line 73
+# parameter: path — line 73
+# definition: write — line 78
+# parameter: data — line 78
+# parameter: path — line 78
+# variable: descriptor — line 80
+# variable: stream — line 81
+# definition: decode — line 85
+# parameter: data — line 86
+# parameter: scratch — line 86
+# variable: executable — line 89
+# variable: scratch — line 105
+# variable: directory — line 107
+# variable: snapshot — line 108
+# variable: completed — line 110
+# variable: key — line 117
+# variable: value — line 117
+# definition: analyze — line 130
+# parameter: args — line 130
+# variable: settings — line 134
 # variable: events — line 137
-# variable: findings — line 138
-# variable: value — line 139
-# variable: connection — line 140
-# variable: selected — line 156
-# variable: target — line 177
-# definition: main — line 186
-# parameter: argv — line 186
-# variable: parser — line 188
-# variable: commands — line 191
-# variable: demo — line 192
-# variable: analysis — line 196
-# variable: args — line 216
-# variable: case — line 220
+# variable: issues — line 138
+# variable: digests — line 139
+# variable: data — line 141
+# variable: _ — line 144
+# variable: events — line 144
+# variable: issues — line 144
+# variable: data — line 146
+# variable: events — line 148
+# variable: findings — line 149
+# variable: value — line 150
+# variable: connection — line 151
+# variable: selected — line 167
+# variable: target — line 188
+# definition: main — line 197
+# parameter: argv — line 197
+# variable: parser — line 199
+# variable: commands — line 202
+# variable: demo — line 203
+# variable: analysis — line 207
+# variable: args — line 227
+# variable: case — line 231
 # END CODE MAP
 
 from __future__ import annotations
@@ -58,6 +60,7 @@ from contextlib import closing
 from pathlib import Path
 
 from ndal.detect import detect, policy
+from ndal.inputs import read_source
 from ndal.model import MAX_INPUT, Event, Issue, logs, native, unique_object
 from ndal.query import query
 from ndal.report import document, render
@@ -68,14 +71,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def read(path: Path, maximum: int = MAX_INPUT) -> bytes:
-    """Read one explicit regular file with size plus bounded-read checks, not devices/directories."""
-    if not path.is_file() or path.stat().st_size > maximum:
-        raise ValueError("input file/byte limit")
-    with path.open("rb") as stream:
-        data = stream.read(maximum + 1)
-    if len(data) > maximum:
-        raise ValueError("input changed/exceeds byte limit")
-    return data
+    """Read a same-descriptor bounded ordinary file; reject link/device/FIFO swaps before opening can block."""
+    return read_source(path, maximum)
 
 
 def write(path: Path, data: bytes) -> None:
@@ -85,12 +82,18 @@ def write(path: Path, data: bytes) -> None:
         stream.write(data)
 
 
-def decode(data: bytes) -> tuple[int, list[Event], list[Issue]]:
+def decode(
+    data: bytes, *, scratch: Path | None = None
+) -> tuple[int, list[Event], list[Issue]]:
     """Invoke only this repo's compiled native binary without a shell; deadline bounds parser jobs."""
     executable = (
-        ROOT
-        / "target/release"
-        / ("packet-decoder.exe" if os.name == "nt" else "packet-decoder")
+        ROOT / "native/packet-decoder.exe"
+        if getattr(sys, "frozen", False)
+        else (
+            ROOT
+            / "target/release"
+            / ("packet-decoder.exe" if os.name == "nt" else "packet-decoder")
+        )
     )
     if not executable.is_file():
         raise ValueError(
@@ -98,8 +101,10 @@ def decode(data: bytes) -> tuple[int, list[Event], list[Issue]]:
         )
     if len(data) > MAX_INPUT:
         raise ValueError("capture byte limit")
-    (ROOT / "out").mkdir(exist_ok=True, mode=0o700)
-    with tempfile.TemporaryDirectory(dir=ROOT / "out") as directory:
+    if scratch is None:
+        scratch = ROOT / "out"
+        scratch.mkdir(exist_ok=True, mode=0o700)
+    with tempfile.TemporaryDirectory(dir=scratch) as directory:
         snapshot = Path(directory) / "snapshot.pcap"
         write(snapshot, data)
         completed = subprocess.run(
@@ -107,6 +112,12 @@ def decode(data: bytes) -> tuple[int, list[Event], list[Issue]]:
             capture_output=True,
             timeout=15,
             check=False,
+            env={
+                key: value
+                for key, value in os.environ.items()
+                if key.upper() in ("SYSTEMROOT", "WINDIR", "TEMP", "TMP")
+            },
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
     if completed.returncode:
         raise ValueError(
