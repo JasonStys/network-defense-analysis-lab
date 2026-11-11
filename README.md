@@ -29,6 +29,8 @@ this same application. The portable build includes its runtime and needs no user
 compiler or command setup. Read the [native workflow, privacy and build guide](docs/native-workbench.md).
 The current source recipe and actual packaged acceptance are recorded separately
 from publication in the [native validation report](docs/reports/native-workbench-2026-11-11.md).
+The [profile admission review](docs/reports/profile-admission-2026-11-11.md)
+explains linked-state refusal and retained ordinary SQLite recovery.
 
 ### Existing command line
 
@@ -114,6 +116,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/native-workbench-2026-11-11.md](docs/reports/native-workbench-2026-11-11.md) | Native workbench validation — November 11, 2026. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/profile-admission-2026-11-11.md](docs/reports/profile-admission-2026-11-11.md) | Native profile admission — November 11, 2026. |
 | [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed Word project guide bound to the documented source revision. |
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact Office digests, visual review scopes and immutable source baselines. |
 | [docs/reports/query-2026-11-09.md](docs/reports/query-2026-11-09.md) | Snapshot-bound analyst drilldown validation — November 9, 2026. |
@@ -163,6 +166,7 @@ Generated from the exact tracked inventory; unknown files or stale summaries fai
 | [tests/test\_desktop\_state.py](tests/test_desktop_state.py) | Independent offline desktop ownership, byte-bound, SQLite and non-overwrite regressions. Jason Stys. |
 | [tests/test\_native\_inputs.py](tests/test_native_inputs.py) | Actual descriptor identity, FIFO availability, resource bounds and minimal native environment. Jason Stys. |
 | [tests/test\_pipeline.py](tests/test_pipeline.py) | Jason Stys: real Rust subprocess, labeled scenario, CLI privacy, evidence SQL and report integration tests. |
+| [tests/test\_profile\_admission.py](tests/test_profile_admission.py) | Actual pre-existing alias refusal and ordinary SQLite recovery continuity. Jason Stys. |
 | [tests/test\_publication\_policy.py](tests/test_publication_policy.py) | Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions. |
 | [tests/test\_query.py](tests/test_query.py) | Jason Stys: independent keyset query, detector scope and capture-gap regression cases. |
 | [tools.lock.json](tools.lock.json) | Official scanner versions, release URLs and pinned SHA256 digests. |
