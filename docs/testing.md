@@ -1,5 +1,14 @@
 # Testing strategy and acceptance gates
 
+Native workbench verification adds independent real-decoder absolute scenarios,
+custom log/policy input, saved-snapshot cursor/filter binding, SQLite literal
+search, edited-input retention and ownership/bounds/mutation controls. The actual
+Windows EXE additionally drives the same real widgets/mainloop, eight workflows,
+two launches, exact persisted bundles/export and normal owned PID disappearance.
+Prepared files contain only reserved-address synthetic data. No default profile
+or live capture interface is opened. The original 95% all-runtime-module combined
+coverage floor and native/debug/release/differential/security gates remain intact.
+
 Author: Jason Stys. Tests exercise actual native execution and database behavior, not a mocked success summary.
 
 ## Coverage by layer

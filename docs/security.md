@@ -1,5 +1,15 @@
 # Threat model and security policy
 
+The optional native GUI is a trusted-OS-owner offline application. Its profile is
+outside executable/repository files, product-marked and exclusively locked. It
+contains sensitive normalized metadata in plaintext. Fixed resource identities
+are verified before opening it. Actual file inputs use a bounded nonblocking
+regular one-link descriptor, refuse linked ancestors and reject changed identity,
+size or timestamps. The decoder inherits only OS temporary/runtime variables;
+provider keys and Python/Node configuration are not passed to the child. Exit
+retains ownership while the finite worker finishes. None of these controls protects
+against a malicious OS owner/administrator or authenticates source acquisition.
+
 Author: Jason Stys. Intended environment: an authorized developer's local account analyzing synthetic fixtures.
 
 ## Assets, threats and defenses
