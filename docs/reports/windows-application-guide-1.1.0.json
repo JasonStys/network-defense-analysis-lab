@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "repository": "network-defense-analysis-lab",
+  "runtimeVersion": "1.1.0",
+  "runtimeSource": "725be04258204035927cb5aa38c92a7c95bcfded",
+  "createdAt": "2026-11-11T11:14:21.435Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide-1.1.0.docx",
+  "sha256": "c55e9f926d04bd152ff208768b1ee24fa63833b898f2cf57b94612ded76c5942",
+  "screenshots": [
+    {
+      "file": "owner-unknown-review.png",
+      "sha256": "d80f4cc60c23e0523774b013137e7030c4ab3f60d00a1b608f356befffe3d8f6",
+      "width": 1276,
+      "height": 899,
+      "caption": "The installed workbench displays a source-bound synthetic evidence review with its original findings and visibility caveats retained."
+    },
+    {
+      "file": "selected-evidence.png",
+      "sha256": "90063dc23cca91ff8681c17cb891ac3cdacf4aa77b0c1d1d180dff6490d96d3a",
+      "width": 1276,
+      "height": 899,
+      "caption": "The installed workbench shows Original full-snapshot hypotheses, including DNS NXDOMAIN-burst and TCP-periodicity review prompts. These whole-capture findings remain separate from bounded evidence pages and their filters."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "ndal/desktop_project.py",
+      "first": 311,
+      "last": 318,
+      "sha256": "2d42c99b08a0c6051af0bdf7001266cf3fd7a77bf0e38248fed03c5975647b31",
+      "url": "https://github.com/JasonStys/network-defense-analysis-lab/blob/725be04258204035927cb5aa38c92a7c95bcfded/ndal/desktop_project.py#L311"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Installed native workflows",
+      "observed": "Two real installed EXE launches passed all eight original native workflows, exact exports and byte-identical saved bundle retention, with normal owned exits.",
+      "result": "Passed"
+    },
+    {
+      "name": "Original engines",
+      "observed": "153 Python tests passed with 96.57% coverage and three explicit platform skips. Rust passed 15 debug and 15 release cases; the actual tcpdump differential remained required.",
+      "result": "Passed"
+    },
+    {
+      "name": "Source and security",
+      "observed": "All exact-main CI and processed CodeQL passed with zero open main alerts. Stable ordinary-file/FIFO/link/growth controls and cursor/filter regressions passed.",
+      "result": "Passed"
+    },
+    {
+      "name": "Downloaded installation",
+      "observed": "Five downloaded assets matched provider SHA-256. The actual Python 3.14.10 DLL and bundled Rust decoder were bound to installed proof; individual icon targets passed read-back.",
+      "result": "Passed"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "reviewer": "audit_cyber",
+    "ooxmlSchema": "passed",
+    "pages": [
+      {
+        "page": 1,
+        "sha256": "c4c6137d7b80ee1bdb8777731972f0874f2614e130c8b8dee7f48946ddf6c952"
+      },
+      {
+        "page": 2,
+        "sha256": "6d07cbf049709884a9b42d8d4c94978b2cb83e0bbed4160827d13d882488c1ac"
+      },
+      {
+        "page": 3,
+        "sha256": "45d9076f7a8cd80aad4fa8909de7301f95e524b79302e73f0e0b835b3d8457f1"
+      },
+      {
+        "page": 4,
+        "sha256": "6dcddc91be9bef9e310d0fb61d407b7bcb4efd554f3399da15f91b3936a6e47b"
+      }
+    ],
+    "scope": "Every final page content individually viewed; only exact identical pixels carry prior inspection. Screenshots are actual installed synthetic workflows.",
+    "checkedUtc": "2026-11-11T11:29:44.247131+00:00"
+  }
+}

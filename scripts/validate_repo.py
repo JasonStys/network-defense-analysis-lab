@@ -3,27 +3,27 @@
 # variable: ROOT — line 36
 # definition: public_text — line 39
 # parameter: path — line 39
-# variable: package — line 43
-# variable: members — line 44
-# variable: member — line 45
-# variable: names — line 45
-# variable: member — line 49
-# variable: item — line 54
-# variable: inspected — line 58
-# variable: member — line 59
-# variable: member — line 61
-# variable: member — line 65
-# definition: main — line 68
-# variable: names — line 70
-# variable: name — line 77
-# variable: path — line 78
-# variable: text — line 84
-# variable: target — line 89
-# variable: action — line 95
-# variable: word — line 99
-# variable: word — line 113
-# variable: graph — line 120
-# variable: tool — line 126
+# variable: package — line 46
+# variable: members — line 47
+# variable: member — line 48
+# variable: names — line 48
+# variable: member — line 52
+# variable: item — line 57
+# variable: inspected — line 61
+# variable: member — line 62
+# variable: member — line 64
+# variable: member — line 68
+# definition: main — line 71
+# variable: names — line 73
+# variable: name — line 80
+# variable: path — line 81
+# variable: text — line 87
+# variable: target — line 92
+# variable: action — line 98
+# variable: word — line 102
+# variable: word — line 116
+# variable: graph — line 123
+# variable: tool — line 129
 # END CODE MAP
 
 import json
@@ -37,8 +37,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def public_text(path: Path) -> str:
-    """Inspect all XML/relationships in the one authored Word path; unknown binary files still fail closed."""
-    if path.relative_to(ROOT).as_posix() != "docs/reports/project-guide.docx":
+    """Inspect all XML/relationships in the exact reviewed Word editions; unknown binary files still fail closed."""
+    if path.relative_to(ROOT).as_posix() not in {
+        "docs/reports/project-guide.docx",
+        "docs/reports/windows-application-guide-1.1.0.docx",
+    }:
         return path.read_text(encoding="utf-8")
     with ZipFile(path) as package:
         members = package.infolist()
